@@ -3,7 +3,8 @@ import {
     TouchableWithoutFeedback,
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Dimensions
 } from 'react-native';
 
 interface CompProps {
@@ -11,6 +12,8 @@ interface CompProps {
     text: string,
     callbackClick:() => void
 }
+
+const { width } = Dimensions.get('window');
 
 function ItemBtn(props: CompProps) {
 
@@ -36,7 +39,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5
     },
     btnContainer: {
-        width: 120,
+        //width: 120,
+        width: ((width / 3) - 10) - 10,
         height: 120,
         justifyContent: 'space-between',
         backgroundColor: 'rgba(255,255,255,0.3)',

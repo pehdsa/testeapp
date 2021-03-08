@@ -1,13 +1,15 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, StackNavigationOptions } from '@react-navigation/stack';
 
-import { theme } from '../config';
+import { StackScreen } from '../config';
 
 const Stack = createStackNavigator();
 
 import Home from '../pages/Home';
-import Extract from '../pages/Extract';
+import Extrato from '../pages/Extrato';
+import Despesa from '../pages/Despesa';
+import Receita from '../pages/Receita'; 
 
 export default function App() {
 	return (
@@ -21,24 +23,26 @@ export default function App() {
                 />
 
                 <Stack.Screen 
-                    name="Extract" 
-                    component={ Extract } 
+                    name="Receita" 
+                    component={ Receita } 
                     options={{ 
-                        headerTitleAlign: 'left',
-                        headerTitleStyle: { fontSize: 18, color: theme.colors.default, fontWeight: 'bold' ,overflow: 'hidden' },
-                        headerStyle: { 
-                            height: 95, 
-                            backgroundColor: '#FFF', 
-                            shadowColor: 'transparent',
-                            shadowRadius: 0,
-                            elevation: 0,
-                        },      
-                        headerBackTitle: "",
-                        cardOverlayEnabled: true,
-                        cardShadowEnabled: true,
-                        cardStyle: {
-                            backgroundColor: theme.colors.defaultBg
-                        }
+                        ...StackScreen as StackNavigationOptions
+                    }} 
+                />
+
+                <Stack.Screen 
+                    name="Despesa" 
+                    component={ Despesa } 
+                    options={{ 
+                        ...StackScreen as StackNavigationOptions
+                    }} 
+                />
+
+                <Stack.Screen 
+                    name="Extrato" 
+                    component={ Extrato } 
+                    options={{ 
+                        ...StackScreen as StackNavigationOptions
                     }} 
                 />
 

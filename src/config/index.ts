@@ -8,7 +8,9 @@ const theme = {
         default4: '#a8a9a9',
         default2: '#d0d0d1',
         default1: '#e4e4e4',
-        danger: "#990000"
+        borderColor: '#d9d9d9',
+        receita: '#155724',
+        despesa: '#721c24'
     },
     baseContainer: {
         flex: 1,
@@ -24,7 +26,26 @@ const theme = {
     },
 }
 
+const StackScreen = {
+    headerTitleAlign: 'left',
+    headerTitleStyle: { fontSize: 18, color: theme.colors.default, fontWeight: 'bold' ,overflow: 'hidden' },
+    headerStyle: { 
+        height: 95, 
+        backgroundColor: '#FFF', 
+        shadowColor: 'transparent',
+        shadowRadius: 0,
+        elevation: 0,
+    },      
+    headerBackTitle: "",
+    cardOverlayEnabled: true,
+    cardShadowEnabled: true,
+    cardStyle: {
+        backgroundColor: theme.colors.defaultBg
+    }
+}
+
 
 export {
-    theme
+    theme,
+    StackScreen
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { 
     SafeAreaView,
     View,
@@ -7,13 +7,14 @@ import {
     StyleSheet,
     StatusBar,
     Image,
-    ScrollView
+    ScrollView,
+    Platform
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { theme } from '../../config';
 import { moneyFormatter } from '../../utils';
-
+import { DataContext } from '../../contexts';
 
 //@ts-ignore 
 import Logo from '../../assets/logo.png';
@@ -30,15 +31,23 @@ import ItemBtn from '../../components/ItemBtn';
 
 function Home() {
 
+    const { saldo } = useContext(DataContext);
     const navigation = useNavigation();
 
-    function gotToExtract() {
-        navigation.navigate('Extract');
+    if (Platform.OS === 'ios') {
+        useEffect(() => {
+            const focusListener = navigation.addListener('focus', () => {
+                StatusBar.setBarStyle('light-content');
+            });      
+            return focusListener;
+        },[navigation]);
     }
 
     return (
         <>
+        
         <StatusBar barStyle="light-content" backgroundColor="#4650c7" />
+        
         <SafeAreaView style={[ theme.baseContainer as ViewStyle, { justifyContent: 'space-between',  backgroundColor: "#4650c7" }]}>
             
             <View style={ styles.logoContainer }>
@@ -61,7 +70,7 @@ function Home() {
                         <View style={ styles.amountContainer }>
                             <Text allowFontScaling={ false } style={ styles.amountTextCurrency }>R$</Text>
                             <Text allowFontScaling={ false } style={ styles.amountTextValue }>
-                                { moneyFormatter(200) }
+                                { moneyFormatter(saldo) }
                             </Text>
                         </View>
                     </View>
@@ -82,19 +91,19 @@ function Home() {
                         <ItemBtn 
                             icon={ <Image source={ Receita } style={{ width: 20, height: 20 }} resizeMode="cover" /> }
                             text="Receita"
-                            callbackClick={ gotToExtract }
+                            callbackClick={() => navigation.navigate('Receita')}
                         />
 
                         <ItemBtn 
                             icon={ <Image source={ Despesa } style={{ width: 20, height: 20 }} resizeMode="cover" /> }
                             text="Despesa"
-                            callbackClick={ gotToExtract }
+                            callbackClick={() => navigation.navigate('Despesa')}
                         />
 
                         <ItemBtn 
                             icon={ <Image source={ Extrato } style={{ width: 20, height: 20 }} resizeMode="cover" /> }
                             text="Extrato"
-                            callbackClick={ gotToExtract }
+                            callbackClick={() => navigation.navigate('Extrato')}
                         />
 
                     </View>
@@ -167,7 +176,7 @@ const styles = StyleSheet.create({
     btnsContainer: {
         height: 130,
         paddingBottom: 10
-    },
+    }
 
 });
 
