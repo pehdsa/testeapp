@@ -13,6 +13,20 @@ plugin para lidar com máscara nos inputs [link](https://github.com/benhurott/re
 
 ## Como Usar
 
+### Default
+
+#### Yarn
+
+```bash
+  yarn install
+```
+#### Npm
+
+```bash
+  npm i
+```
+
+
 ### Ios
 
 ir para para a pasta /ios e executar:
